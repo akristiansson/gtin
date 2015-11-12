@@ -1,4 +1,4 @@
-is_gtin <- function(x, type = c(8, 12, 13, 14, 18)) {
+is_gtin <- function(x, type = c(8L, 12L, 13L, 14L, 18L)) {
   require(magrittr)
   
   digits <- strsplit(x, "") %>%
