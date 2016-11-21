@@ -1,13 +1,15 @@
 let is_gtin = function (str) {
     try {
-        var digits = [...str].map(x => parseInt(x));
+        var digits = Uint8Array.from([...str].map(x => parseInt(x)))
+            .reverse()
     }
     catch (e) {
         return false;
     }
-    const checkdigit = digits.pop();
-    const mod = digits
-        .reverse()
-        .reduce((cum, digit, i) => cum + digit * (i % 2 == 0 ? 3 : 1), 0) % 10;
-    return checkdigit == (mod == 0 ? mod : 10 - mod);
+    const m = digits
+        .slice(1)
+        .reduce(
+            (acc, x, i) => acc + x + (i & 1 == 0 ? x << 1 : 0), 0
+        ) % 10;
+    return digits[0] == (m == 0 ? m : 10 - m);
 }
