@@ -9,7 +9,7 @@ let is_gtin = function (str) {
     const m = digits
         .slice(1)
         .reduce(
-            (acc, x, i) => acc + x + (i & 1 == 0 ? x << 1 : 0), 0
+            (acc, x, i) => acc - x + (x << (((i + 1) & 1) + 1)), 0
         ) % 10;
     return digits[0] == (m == 0 ? m : 10 - m);
 }
