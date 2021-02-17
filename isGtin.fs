@@ -12,8 +12,7 @@ let isGtin (x: String): Boolean =
         every digits.Tail digits.Head
 
     let ds = 
-        x.ToCharArray() 
-        |> fun x -> if Array.forall Char.IsDigit x then x else raise (System.ArgumentException("Non-digit found in string."))
+        if String.forall Char.IsDigit x then x.ToCharArray() else raise (System.ArgumentException("Non-digit found in string."))
         |> Array.map (fun x -> int x - int '0')
         |> Array.rev
         |> List.ofArray 
